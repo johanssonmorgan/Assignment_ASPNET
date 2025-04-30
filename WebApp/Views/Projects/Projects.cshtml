@@ -1,0 +1,40 @@
+﻿@model ProjectsPageViewModel
+
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<partial name="Partials/Sections/_AddProjectForm" model="Model.AddProject" />
+<partial name="Partials/Sections/_EditProjectForm" model="Model.EditProject" />
+
+<section id="projects">
+    <header>
+        <h2>@ViewData["Title"]</h2>
+        <button type="button" data-modal="true" data-target="#addProjectModal" class="btn btn-add btn-blue">Add Project</button>
+    </header>
+    <div class="p-page-layout">
+        <div class="p-page-filter">
+            <a href="/projects">All [@Model.Projects.Count()]</a>
+            @foreach (var status in Model.Statuses.OrderBy(s => s.Id))
+            {
+                var projectCount = Model.Projects.Count(p => p.StatusId == status.Id);
+                <a href="?statusId=@status.Id">@status.StatusName [@projectCount]</a>
+            }
+        </div>
+        <div class="p-page-content">
+            @foreach (var project in Model.FilteredProjects)
+            {
+                try
+                {
+                    @await Html.PartialAsync("Partials/Components/_ProjectCard", project)
+                }
+                catch (Exception ex)
+                {
+                    <div class="error">Failed to render project card. @ex.Message</div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("_QuillScripts")
