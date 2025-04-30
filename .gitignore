@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Custom ignores
+/WebApp/wwwroot/uploads/*
+!/WebApp/wwwroot/uploads/.gitkeep
+/WebApp/wwwroot/Images/users/
+/WebApp/appsettings.json
+/WebApp/appsettings.Development.json
