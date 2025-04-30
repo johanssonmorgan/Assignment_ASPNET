@@ -87,7 +87,7 @@
                     <ul class="form-select-options">
                         @foreach (var user in Model.Users!)
                         {
-                            <li class="form-select-option" data-value="@user.Id">@user.FullName</li>
+                            <li class="form-select-option" data-value="@user.Id">@user.SelectDisplayName</li>
                         }
                     </ul>
                     <input asp-for="UserId" type="hidden" />
