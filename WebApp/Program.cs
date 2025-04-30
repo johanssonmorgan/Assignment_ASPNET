@@ -10,6 +10,12 @@ using System.Security.Claims;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => !context.Request.Cookies.ContainsKey("cookieConsent");
+    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+});
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
@@ -90,6 +96,7 @@ app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseCookiePolicy();
 app.UseAuthentication();
 app.UseAuthorization();
 

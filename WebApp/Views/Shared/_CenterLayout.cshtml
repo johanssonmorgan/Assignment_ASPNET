@@ -17,6 +17,9 @@
                 @RenderBody()
             </div>
         </div>
+
+        <partial name="Partials/Sections/_CookieConsentPartial" />
+        <script src="~/js/cookie-consent.js" asp-append-version="true"></script>
         @await RenderSectionAsync("Scripts", required: false)
     </body>
 </html>
