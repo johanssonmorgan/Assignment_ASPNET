@@ -2,21 +2,19 @@
 using Data.Entities;
 using Domain.Extensions;
 using Domain.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebApp.Models;
-using System.ComponentModel;
 
 namespace WebApp.Controllers;
 
-public class AuthController(IAuthService authService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager) : Controller
+public class AuthController(IAuthService authService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, INotificationService notificationService) : Controller
 {
     private readonly IAuthService _authService = authService;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
     private readonly UserManager<UserEntity> _userManager = userManager;
+    private readonly INotificationService _notificationService = notificationService;
 
     #region local identity
     public IActionResult SignUp()
@@ -167,6 +165,14 @@ public class AuthController(IAuthService authService, SignInManager<UserEntity> 
                 }
 
                 await _signInManager.SignInAsync(user, isPersistent: false);
+
+                await _notificationService.AddNotificationAsync(new NotificationEntity
+                {
+                    Message = $"{user.FirstName} {user.LastName} signed in with {info.LoginProvider}.",
+                    NotificationTypeId = 1,
+                    Image = user.Image ?? "/Images/templates/user-template.svg"
+                }, user.Id);
+
             }
             return LocalRedirect(returnUrl);
         }

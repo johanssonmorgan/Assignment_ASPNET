@@ -3,6 +3,7 @@ using Domain.Extensions;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WebApp.Models;
 
 namespace WebApp.Controllers;
@@ -96,7 +97,8 @@ public class ProjectsController(IProjectService projectService, IWebHostEnvironm
         var formData = model.MapTo<AddProjectForm>();
         formData.Image = imagePath;
 
-        var result = await _projectService.CreateProjectAsync(formData);
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var result = await _projectService.CreateProjectAsync(formData, userId!);
 
         return Json(new { success = result.Succeeded });
     }
@@ -146,7 +148,8 @@ public class ProjectsController(IProjectService projectService, IWebHostEnvironm
             formData.Image = $"/uploads/{imageFileName}";
         }
 
-        var result = await _projectService.UpdateProjectAsync(formData);
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var result = await _projectService.UpdateProjectAsync(formData, userId!);
 
         return Json(new { success = result.Succeeded });
     }

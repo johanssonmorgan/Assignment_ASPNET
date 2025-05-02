@@ -527,7 +527,6 @@ button {
 }
 
     .btn-notification .dot {
-        display:none;
         position: absolute;
         top: 4px;
         right: 4px;
@@ -1252,7 +1251,7 @@ textarea,
     padding: .8rem;
     border-radius: .875rem;
     box-shadow: var(--box-shadow);
-    z-index: 100;
+    z-index: 5;
 }
     .dropdown.dropdown-show {
         display: block;
@@ -1685,7 +1684,7 @@ m-card-member {
 /* #endregion */
 
 .modal {
-    z-index: 1;
+    z-index: 6;
 }
 
 #addClientModal .modal-content{
@@ -1747,7 +1746,7 @@ m-card-member {
             background-color: var(--user-notification-background-hover-clr);
         }
 
-    #notification-container .notifications .notification .user-img {
+    #notification-container .notifications .notification .user-image {
         grid-area: img;
         border-radius: 50%;
         overflow: hidden;
@@ -1758,6 +1757,18 @@ m-card-member {
         justify-content: center;
         align-items: center;
     }
+        #notification-container .notifications .notification .project-image {
+            grid-area: img;
+            border-radius: 1rem;
+            overflow: hidden;
+            height: 56px;
+            aspect-ratio: 1;
+            border: 3px solid var(--account-name-image-border-clr);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
     #notification-container .notifications .notification .project-img {
         grid-area: img;
         border-radius: 1rem;

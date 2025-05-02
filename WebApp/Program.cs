@@ -1,3 +1,4 @@
+using Business.Hubs;
 using Business.Services;
 using Data.Contexts;
 using Data.Entities;
@@ -9,6 +10,7 @@ using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
@@ -79,6 +81,8 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+builder.Services.AddScoped<INotificationService, NotificationService>();
+
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IStatusRepository, StatusRepository>();
@@ -127,10 +131,30 @@ using (var scope = app.Services.CreateScope())
         }
     }
 
+    string[] notificationTypesToSeed = ["User", "Project"];
+
+    foreach (var notificationType in notificationTypesToSeed)
+    {
+        var exists = await db.NotificationTypes.AnyAsync(s => s.NotificationType == notificationType);
+        if (!exists)
+        {
+            db.NotificationTypes.Add(new NotificationTypeEntity { NotificationType = notificationType });
+        }
+    }
+
+    string[] notificationTargetGroupsToSeed = ["AllUsers", "Admins"];
+
+    foreach (var notificationTargetGroup in notificationTargetGroupsToSeed)
+    {
+        var exists = await db.NotificationTargetGroups.AnyAsync(s => s.TargetGroup == notificationTargetGroup);
+        if (!exists)
+        {
+            db.NotificationTargetGroups.Add(new NotificationTargetGroupEntity { TargetGroup = notificationTargetGroup });
+        }
+    }
+
     await db.SaveChangesAsync();
 }
-
-
 
 app.MapStaticAssets();
 
@@ -138,5 +162,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=auth}/{action=SignIn}/{id?}")
     .WithStaticAssets();
+
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.Run();

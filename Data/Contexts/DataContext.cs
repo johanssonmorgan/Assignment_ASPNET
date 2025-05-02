@@ -9,6 +9,10 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
     public virtual DbSet<ClientEntity> Clients { get; set; }
     public virtual DbSet<StatusEntity> Status { get; set; }
     public virtual DbSet<ProjectEntity> Projects { get; set; }
+    public virtual DbSet<NotificationEntity> Notifications { get; set; }
+    public virtual DbSet<NotificationDismissedEntity> DismissedNotifications { get; set; }
+    public virtual DbSet<NotificationTypeEntity> NotificationTypes { get; set; }
+    public virtual DbSet<NotificationTargetGroupEntity> NotificationTargetGroups { get; set; }
     public virtual DbSet<MemberAddressEntity> MemberAddresses { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

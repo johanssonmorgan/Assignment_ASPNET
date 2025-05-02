@@ -14,4 +14,5 @@ public class UserEntity : IdentityUser
     public MemberAddressEntity? Address { get; set; }
 
     public ICollection<ProjectEntity> Projects { get; set; } = [];
+    public ICollection<NotificationDismissedEntity> DismissedNotifications { get; set; } = [];
 }
