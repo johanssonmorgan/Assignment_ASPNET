@@ -1,7 +1,30 @@
-﻿// =============================
-// Helpers
-// =============================
+﻿// #region Dark Mode Toggle
+document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('darkModeToggle');
+    if (!toggle) return;
 
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        toggle.checked = true;
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        toggle.checked = false;
+    }
+
+    toggle.addEventListener('change', function () {
+        if (this.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+});
+// #endregion
+
+// #region Helpers
 function clearErrorMessages(form) {
     form.querySelectorAll('[data-val="true"]').forEach(input => {
         input.classList.remove('input-validation-error');
@@ -50,11 +73,9 @@ async function processImage(file, imagePreview, previewer, previewSize = 150) {
         console.error('Failed on image-processing.', error);
     }
 }
+// #endregion
 
-// =============================
-// Dynamic Form Population
-// =============================
-
+// #region Dynamic Form Population
 function populateForm(form, data) {
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
@@ -81,6 +102,7 @@ function populateForm(form, data) {
         }
     }
 
+    // Handle custom form-select elements
     form.querySelectorAll('.form-select').forEach(select => {
         const input = select.querySelector('input[type="hidden"]');
         const text = select.querySelector('.form-select-text');
@@ -91,6 +113,7 @@ function populateForm(form, data) {
         }
     });
 
+    // Handle preview image from URL
     const imagePreview = form.querySelector('.image-preview');
     if (imagePreview && data.image) {
         const img = new Image();
@@ -115,13 +138,10 @@ function populateForm(form, data) {
         img.src = data.image;
     }
 }
+// #endregion
 
-// =============================
-// DOM Content Loaded
-// =============================
-
+// #region Form Select Dropdowns
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Form Select Dropdowns ---
     document.querySelectorAll('.form-select').forEach(select => {
         const trigger = select.querySelector('.form-select-trigger');
         const triggerText = trigger.querySelector('.form-select-text');
@@ -159,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Simple Dropdowns ---
+    // Dropdown Menu Toggle
     const dropdowns = document.querySelectorAll('[data-type="dropdown"]');
     document.addEventListener('click', function (event) {
         let clickedDropdown = null;
@@ -188,50 +208,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Modal Open and Populate ---
+    // Modal Open and Populate
     const modalButtons = document.querySelectorAll('[data-modal="true"]');
     modalButtons.forEach(button => {
         button.addEventListener('click', async () => {
             const modalTarget = button.getAttribute('data-target');
             const modal = document.querySelector(modalTarget);
             const projectId = button.getAttribute('data-project-id');
-            const userId = button.getAttribute('data-user-id')
-            const clientId = button.getAttribute('data-client-id')
+            const userId = button.getAttribute('data-user-id');
+            const clientId = button.getAttribute('data-client-id');
 
             if (modal) {
                 const form = modal.querySelector('form');
-                if (projectId) {
-                    try {
+                try {
+                    if (projectId) {
                         const res = await fetch(`/projects/get?id=${projectId}`);
                         const project = await res.json();
-                        if (form) {
-                            populateForm(form, project);
-                        }
-                    } catch (err) {
-                        console.error("Failed to load project:", err);
+                        if (form) populateForm(form, project);
+                    } else if (userId) {
+                        const res = await fetch(`/members/get?id=${userId}`);
+                        const user = await res.json();
+                        if (form) populateForm(form, user);
+                    } else if (clientId) {
+                        const res = await fetch(`/clients/get?id=${clientId}`);
+                        const client = await res.json();
+                        if (form) populateForm(form, client);
                     }
+                } catch (err) {
+                    console.error("Failed to load modal data:", err);
                 }
-                else if (userId) {
-                    const res = await fetch(`/members/get?id=${userId}`);
-                    const user = await res.json();
-                    if (form) {
-                        populateForm(form, user);
-                    }
-                }
-                else if (clientId) {
-                    const res = await fetch(`/clients/get?id=${clientId}`);
-                    const user = await res.json();
-                    if (form) {
-                        populateForm(form, user);
-                    }
-                }
+
                 modal.style.display = 'grid';
             }
         });
     });
 
-    // --- Modal Close ---
-    const previewSize = 150;
+    // Modal Close
     const closeButtons = document.querySelectorAll('[data-close="true"]');
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -243,18 +255,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     form.reset();
 
                     const imagePreview = form.querySelector('.image-preview');
-                    if (imagePreview)
-                        imagePreview.src = '';
+                    if (imagePreview) imagePreview.src = '';
 
                     const imagePreviewer = form.querySelector('.image-previewer');
-                    if (imagePreviewer)
-                        imagePreviewer.classList.remove('selected');
+                    if (imagePreviewer) imagePreviewer.classList.remove('selected');
                 });
             }
         });
     });
 
-    // --- Image Previewer (Upload + Preview) ---
+    // Image Preview Upload
     document.querySelectorAll('.image-previewer').forEach(previewer => {
         const fileInput = previewer.querySelector('input[type="file"]');
         const imagePreview = previewer.querySelector('.image-preview');
@@ -263,12 +273,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fileInput.addEventListener('change', ({ target: { files } }) => {
             const file = files[0];
-            if (file)
-                processImage(file, imagePreview, previewer, previewSize);
+            if (file) processImage(file, imagePreview, previewer);
         });
     });
 
-    // --- Form Submit Handling ---
+    // Form Submit Handling
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
         form.addEventListener('submit', async (e) => {
@@ -285,22 +294,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (res.ok) {
                     const modal = form.closest('.modal');
-                    if (modal)
-                        modal.style.display = 'none';
-
+                    if (modal) modal.style.display = 'none';
                     window.location.reload();
-                }
-                else if (res.status === 400) {
+                } else if (res.status === 400) {
                     const data = await res.json();
-
                     if (data.errors) {
                         Object.keys(data.errors).forEach(key => {
-                            let input = form.querySelector(`[name="${key}"]`);
-                            if (input) {
-                                input.classList.add('input-validation-error');
-                            }
+                            const input = form.querySelector(`[name="${key}"]`);
+                            if (input) input.classList.add('input-validation-error');
 
-                            let span = form.querySelector(`[data-valmsg-for="${key}"]`);
+                            const span = form.querySelector(`[data-valmsg-for="${key}"]`);
                             if (span) {
                                 span.innerText = data.errors[key].join('\n');
                                 span.classList.add('field-validation-error');
@@ -308,11 +311,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     }
                 }
-            }
-            catch {
+            } catch {
                 console.log('Error submitting the form.');
             }
         });
     });
-
 });
+// #endregion
