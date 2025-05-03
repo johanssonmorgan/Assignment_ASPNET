@@ -6,7 +6,7 @@
 }
 
 :root {
-    /* typography */
+    /* #region typography */
     --font-standard: "Nunito", sans-serif;
     --font-logo: "Comfortaa", sans-serif;
     --font-fa-pro: "Font Awesome 6 Pro";
@@ -23,7 +23,8 @@
     --font-size-14: .875rem;
     --font-size-15: .9375rem;
     --font-size-26: 1.625rem;
-    /* colors */
+    /* #endregion */
+    /* #region base-colors */
     --clr-heading: #1A1926;
     --clr-heading-a: #1A192633;
     --clr-heading-25: #1a192640;
@@ -80,6 +81,21 @@
     --clr-dark-purple: #634CD4;
     --clr-accent-dark: #2682D9;
     --clr-transparent: transparent;
+    /* #endregion */
+    /* #region gradients */
+    --mint-sky-gradient: linear-gradient(141deg, rgba(152,253,198,1) 36%, rgba(151,222,252,1) 100%);
+    --neon-sunset-gradient: linear-gradient(18deg, rgba(48, 123, 244, 0.7) 0%, rgba(133, 58, 246, 0.7) 30%, rgba(189, 55, 226, 0.7) 64%, rgba(239, 97, 92, 0.7) 100%);
+    --soft-peach-gradient: linear-gradient(138deg, rgba(255,215,196,1) 54%, rgba(252,166,126,1) 100%);
+    --golden-glow-gradient: linear-gradient(144deg, rgba(255,208,128,1) 36%, rgba(255,187,128,1) 100%);
+    --royal-amethyst-gradient: linear-gradient(142deg, rgba(184,164,252,1) 49%, rgba(184,89,228,1) 100%);
+    --tropical-mango-gradient: linear-gradient(141deg, rgba(244,210,159,1) 0%, rgba(156,240,170,1) 100%);
+    --granny-smith-gradient: linear-gradient(136deg, rgba(217,250,175,1) 41%, rgba(136,227,151,1) 100%);
+    --ember-blush-gradient: linear-gradient(139deg, rgba(255,204,115,1) 57%, rgba(255,147,160,1) 100%);
+    --sunset-rose-gradient: linear-gradient(138deg, rgba(254,192,178,1) 45%, rgba(255,134,107,1) 100%);
+    --box-shadow: 0 8px 10px -4px rgba(0, 0, 0, 0.3);
+    --inner-box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.145);
+    /* #endregion */
+    /* #region light-theme & common-styling */
     --header-text-clr: var(--clr-heading);
     --body-light-text-clr: var(--clr-body-light);
     --body-dark-text-clr: var(--clr-body-dark);
@@ -198,20 +214,12 @@
     --member-card-background-clr: var(--clr-surface);
     --client-card-text-clr: var(--clr-heading);
     --client-card-text-muted-clr: var(--text-muted-clr);
-    /* gradients */
-    --mint-sky-gradient: linear-gradient(141deg, rgba(152,253,198,1) 36%, rgba(151,222,252,1) 100%);
-    --neon-sunset-gradient: linear-gradient(18deg, rgba(48, 123, 244, 0.7) 0%, rgba(133, 58, 246, 0.7) 30%, rgba(189, 55, 226, 0.7) 64%, rgba(239, 97, 92, 0.7) 100%);
-    --soft-peach-gradient: linear-gradient(138deg, rgba(255,215,196,1) 54%, rgba(252,166,126,1) 100%);
-    --golden-glow-gradient: linear-gradient(144deg, rgba(255,208,128,1) 36%, rgba(255,187,128,1) 100%);
-    --royal-amethyst-gradient: linear-gradient(142deg, rgba(184,164,252,1) 49%, rgba(184,89,228,1) 100%);
-    --tropical-mango-gradient: linear-gradient(141deg, rgba(244,210,159,1) 0%, rgba(156,240,170,1) 100%);
-    --granny-smith-gradient: linear-gradient(136deg, rgba(217,250,175,1) 41%, rgba(136,227,151,1) 100%);
-    --ember-blush-gradient: linear-gradient(139deg, rgba(255,204,115,1) 57%, rgba(255,147,160,1) 100%);
-    --sunset-rose-gradient: linear-gradient(138deg, rgba(254,192,178,1) 45%, rgba(255,134,107,1) 100%);
-    --box-shadow: 0 8px 10px -4px rgba(0, 0, 0, 0.3);
-    --inner-box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.145);
+    --filter-text-clr: var(--header-text-clr);
+    --filter-text-hover-clr: var(--clr-accent);
+    --filter-text-active-clr: var(--clr-accent);
+    /* #endregion */
 }
-
+/* #region dark theme */
 [data-theme="dark"] {
     --logo-text-clr: var(--clr-surface);
     --background-clr: var(--clr-background-dark);
@@ -229,33 +237,13 @@
     --text-extra-muted-clr: var(--clr-grey600);
     --surface-background-clr: var(--clr-dark-surface);
     --border-clr: var(--clr-grey500);
-    /*--border-focus-clr: var(--clr-accent);
-    --btn-blue-text-clr: var(--clr-dark-surface);*/
     --btn-blue-border-clr: var(--clr-accent);
     --btn-blue-background-clr: var(--clr-accent);
     --btn-blue-text-clr-hover: var(--clr-dark-surface);
     --btn-blue-border-clr-hover: var(--clr-accent);
-    /*--btn-blue-background-clr-hover: var(--clr-accent-dark);
-    --btn-grey-text-clr: var(--clr-heading);
-    --btn-grey-border-clr: var(--clr-grey100);
-    --btn-grey-background-clr: var(--clr-grey100);
-    --btn-grey-text-clr-hover: var(--clr-heading);
-    --btn-grey-border-clr-hover: var(--clr-grey200);
-    --btn-grey-background-clr-hover: var(--clr-grey200);
-    --btn-account-text-color: #1C1D1F;
-    --btn-account-border-color: var(--clr-dark-surface);
-    --btn-account-background-color: var(--clr-transparent);*/
     --btn-notification-text-color: #1C1D1F;
     --btn-notification-text-hover-color: #1C1D1F;
-    /*--btn-notification-border-color: var(--clr-transparent);
-    --btn-notification-background-color: var(--clr-transparent);
-    --btn-notification-background-hover-color: var(--clr-accent-10);
-    --btn-remove-text-clr: var(--header-text-clr);
-    --btn-remove-border-clr: var(--clr-transparent);
-    --btn-remove-background-clr: var(--clr-transparent);
-    --btn-remove-text-hover-clr: var(--header-text-clr);
-    --btn-remove-border-hover-clr: var(--clr-transparent);
-    --btn-remove-background-hover-clr: var(--clr-accent-10);*/
+    --btn-notification-text-hover-color: #1C1D1F;
     --btn-dots-background-color: var(--clr-surface-10);
     --form-text-clr: var(--clr-dark-surface);
     --form-border-clr: var(--clr-dark-surface);
@@ -321,8 +309,13 @@
     --member-card-background-clr: var(--clr-dark-surface);
     --client-card-text-clr: var(--clr-surface);
     --client-card-text-muted-clr: var(--clr-surface-70);
+    --filter-text-clr: var(--header-text-clr);
+    --filter-text-hover-clr: var(--clr-accent);
+    --filter-text-active-clr: var(--clr-accent);
 }
+/* #endregion */
 
+/* #region general styling */
 html, body {
     font-size: var(--font-size-15);
     font-weight: var(--font-regular);
@@ -338,63 +331,9 @@ header {
     display: flex;
     justify-content: space-between;
 }
+/* #endregion */
 
-.center-screen {
-    display: grid;
-    place-content: center;
-    height: 100dvh;
-}
-
-.surface {
-    background-color: var(--surface-background-clr);
-    border-radius: 1rem;
-    box-shadow: var(--box-shadow);
-}
-
-.portal {
-    display: grid;
-    grid-template-columns: 270px 1fr;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: "logo top" "side main";
-    height: 100dvh;
-    background-color: var(--background-clr);
-}
-
-    .portal > .logo {
-        grid-area: logo;
-        border-right: 1px solid var(--portal-border-clr);
-        display: flex;
-        padding-block: 1.65rem;
-        padding-inline: 2rem;
-    }
-
-        .portal > .logo > .link {
-            display: flex;
-            gap: .7rem;
-            align-items: center;
-            text-decoration: none;
-            font-family: var(--font-logo);
-            font-size: var(--font-size-26);
-            font-weight: var(--font-bold);
-            color: var(--logo-text-clr);
-        }
-
-    .portal > .top {
-        grid-area: top;
-        border-bottom: 1px solid var(--portal-border-clr);
-    }
-
-    .portal > .side {
-        grid-area: side;
-        border-right: 1px solid var(--portal-border-clr);
-        padding-inline: 1rem;
-    }
-
-    .portal > .main {
-        grid-area: main;
-        padding: 2rem;
-        overflow-y: auto;
-    }
+/* #region links, headers & texts */
 
 a {
     color: var(--navlink-text-active-clr);
@@ -447,7 +386,9 @@ h6 {
     font-weight: var(--font-semibold);
 }
 
-/* statuses */
+/* #endregion */
+
+/* #region statuses */
 .success {
     background-color: var(--clr-light-green);
     color: var(--clr-dark-green);
@@ -479,8 +420,9 @@ h6 {
     font-size: var(--font-size-15);
 }
 
-/* buttons */
+/* #endregion */
 
+/* #region buttons */
 button {
     border: 0;
     cursor: pointer;
@@ -677,6 +619,10 @@ button {
         text-decoration: none;
     }
 
+    /* #endregion */
+
+/* #region dots & badges */
+
 .dot {
     font-size: .5em;
     background-color: var(--background-clr);
@@ -698,7 +644,6 @@ button {
         color: var(--dot-green-text-clr);
     }
 
-/* badges */
 .badge {
     display: inline-block;
     border-radius: 10px;
@@ -730,7 +675,9 @@ button {
     margin-block: 2rem;
 }
 
-/* utility classes */
+/* #endregion */
+
+/* #region utility classes */
 .hide {
     display: none !important;
 }
@@ -747,82 +694,9 @@ ul {
     list-style: none;
     margin: 0;
 }
+/* #endregion */
 
-.client-list {
-    height: 100%;
-}
-
-    .client-list table tr {
-        grid-template-columns: minmax(300px, 1fr) minmax(200px, 1fr) minmax(150px, 1fr) 50px;
-        background-color: transparent;
-    }
-
-    .client-list .client-info, .client-location, .client-phone {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-template-areas: "image name" "image email";
-        column-gap: 1rem;
-        align-items: center;
-        color: var(--client-card-text-clr);
-    }
-
-        .client-list .client-info .client-image {
-            grid-area: image;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-        }
-
-        .client-list .client-info .client-name {
-            grid-area: name;
-            font-weight: var(--font-bold);
-        }
-
-        .client-list .client-info .client-email {
-            grid-area: email;
-            color: var(--client-card-text-muted-clr);
-        }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-    table tr {
-        display: grid;
-        align-items: center;
-        width: 100%;
-        border-radius: 1rem;
-        padding: 1rem;
-    }
-
-    table thead,
-    table tbody {
-        display: contents;
-    }
-
-        table thead > tr {
-            background-color: var(--table-header-background-clr);
-            color: var(--table-header-text-clr);
-        }
-
-        table tbody > tr {
-            padding: .7rem 1rem;
-            margin: .5rem 0;
-        }
-
-            table tbody > tr:hover {
-                background-color: var(--table-tbody-tr-background-hover-clr);
-            }
-
-    table th,
-    table td {
-        width: 100%;
-        padding: 0 1rem;
-        text-align: left;
-    }
-
-/* forms */
+/* #region forms */
 form {
     width: 100%;
 }
@@ -892,6 +766,7 @@ input[type="date"] {
 
     input[type="date"]::-webkit-calendar-picker-indicator {
         opacity: 0;
+        cursor: pointer;
     }
 
     input[type="date"]::after {
@@ -904,7 +779,6 @@ input[type="date"] {
         transform: translateY(-50%);
         font-size: 1em;
         color: var(--content-clr);
-        cursor: pointer;
         pointer-events: none;
     }
 
@@ -1153,6 +1027,8 @@ textarea,
     background-color: var(--clr-transparent);
 }
 
+/* #endregion */
+
 /* #region cookie consent */
 #cookieModal {
     position: fixed;
@@ -1350,7 +1226,7 @@ textarea,
 
 /* #endregion */
 
-/* modal */
+/* #region modals */
 .modal {
     display: none;
     place-items: center;
@@ -1360,6 +1236,7 @@ textarea,
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 6;
 }
 
     .modal .modal-content {
@@ -1376,7 +1253,33 @@ textarea,
             margin-bottom: 2rem;
         }
 
-/* partials */
+#addClientModal .modal-content {
+    width: 550px;
+}
+
+#editClientModal .modal-content {
+    width: 550px;
+}
+
+#addProjectModal .modal-content {
+    width: 550px;
+}
+
+#editProjectModal .modal-content {
+    width: 550px;
+}
+
+#addMemberModal .modal-content {
+    width: 550px;
+}
+
+#editMemberModal .modal-content {
+    width: 550px;
+}
+
+/* #endregion */
+
+/* #region nav-links */
 .nav-links {
     margin: 2rem 0;
     display: flex;
@@ -1413,6 +1316,7 @@ textarea,
     gap: 1rem;
     text-align: center;
 }
+/* #endregion */
 
 /* #region header */
 
@@ -1425,6 +1329,7 @@ textarea,
     align-items: center;
 }
 /* #endregion */
+
 /* #region dropdowns */
 .dropdown {
     display: none;
@@ -1556,6 +1461,7 @@ input:checked + .slider {
         transform: translateX(18px);
     }
 /* #endregion */
+
 /* #region members page*/
 .m-card {
     display: flex;
@@ -1673,6 +1579,7 @@ m-card-member {
 
 
 /* #endregion*/
+
 /* #region project page */
 .p-card {
     display: flex;
@@ -1844,6 +1751,21 @@ m-card-member {
     gap: 2rem;
 }
 
+.p-page-filter a{
+    text-decoration: none;
+    color: var(--filter-text-clr);
+}
+
+    .p-page-filter a:hover {
+        text-decoration: underline;
+        color: var(--filter-text-hover-clr);
+    }
+
+    .p-page-filter a.active {
+        text-decoration: underline;
+        color: var(--filter-text-active-clr);
+    }
+
 .p-page-content {
     display: grid;
     row-gap: 2rem;
@@ -1854,7 +1776,82 @@ m-card-member {
     justify-items: center;
 }
 /* #endregion */
+
 /* #region clients page */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    table tr {
+        display: grid;
+        align-items: center;
+        width: 100%;
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+
+    table thead,
+    table tbody {
+        display: contents;
+    }
+
+        table thead > tr {
+            background-color: var(--table-header-background-clr);
+            color: var(--table-header-text-clr);
+        }
+
+        table tbody > tr {
+            padding: .7rem 1rem;
+            margin: .5rem 0;
+        }
+
+            table tbody > tr:hover {
+                background-color: var(--table-tbody-tr-background-hover-clr);
+            }
+
+    table th,
+    table td {
+        width: 100%;
+        padding: 0 1rem;
+        text-align: left;
+    }
+
+.client-list {
+    height: 100%;
+}
+
+    .client-list table tr {
+        grid-template-columns: minmax(300px, 1fr) minmax(200px, 1fr) minmax(150px, 1fr) 50px;
+        background-color: transparent;
+    }
+
+    .client-list .client-info, .client-location, .client-phone {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-areas: "image name" "image email";
+        column-gap: 1rem;
+        align-items: center;
+        color: var(--client-card-text-clr);
+    }
+
+        .client-list .client-info .client-image {
+            grid-area: image;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+        }
+
+        .client-list .client-info .client-name {
+            grid-area: name;
+            font-weight: var(--font-bold);
+        }
+
+        .client-list .client-info .client-email {
+            grid-area: email;
+            color: var(--client-card-text-muted-clr);
+        }
+
 #clients {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -1884,33 +1881,7 @@ m-card-member {
         }
 /* #endregion */
 
-.modal {
-    z-index: 6;
-}
-
-#addClientModal .modal-content {
-    width: 550px;
-}
-
-#editClientModal .modal-content {
-    width: 550px;
-}
-
-#addProjectModal .modal-content {
-    width: 550px;
-}
-
-#editProjectModal .modal-content {
-    width: 550px;
-}
-
-#addMemberModal .modal-content {
-    width: 550px;
-}
-
-#editMemberModal .modal-content {
-    width: 550px;
-}
+/* #region notifications & account */
 
 #notification-container {
     position: relative;
@@ -2055,6 +2026,69 @@ m-card-member {
         align-items: center;
     }
 
+/* #endregion */
+
+/* #region layouts */
+.center-screen {
+    display: grid;
+    place-content: center;
+    height: 100dvh;
+}
+
+.surface {
+    background-color: var(--surface-background-clr);
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+}
+
+.portal {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "logo top" "side main";
+    height: 100dvh;
+    background-color: var(--background-clr);
+}
+
+    .portal > .logo {
+        grid-area: logo;
+        border-right: 1px solid var(--portal-border-clr);
+        display: flex;
+        padding-block: 1.65rem;
+        padding-inline: 2rem;
+    }
+
+        .portal > .logo > .link {
+            display: flex;
+            gap: .7rem;
+            align-items: center;
+            text-decoration: none;
+            font-family: var(--font-logo);
+            font-size: var(--font-size-26);
+            font-weight: var(--font-bold);
+            color: var(--logo-text-clr);
+        }
+
+    .portal > .top {
+        grid-area: top;
+        border-bottom: 1px solid var(--portal-border-clr);
+    }
+
+    .portal > .side {
+        grid-area: side;
+        border-right: 1px solid var(--portal-border-clr);
+        padding-inline: 1rem;
+    }
+
+    .portal > .main {
+        grid-area: main;
+        padding: 2rem;
+        overflow-y: auto;
+    }
+
+/* #endregion */
+
+/* #region auth */
 #signin {
     width: 550px;
     padding: 3rem;
@@ -2127,3 +2161,4 @@ m-card-member {
         font-weight: var(--font-semibold);
         font-size: var(--font-size-15);
     }
+/* #endregion */
