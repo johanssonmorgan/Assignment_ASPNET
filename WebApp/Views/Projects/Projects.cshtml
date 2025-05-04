@@ -14,11 +14,11 @@
     </header>
     <div class="p-page-layout">
         <div class="p-page-filter">
-            <a href="/projects">ALL [@Model.Projects.Count()]</a>
+            <a href="/projects" class="@(Context.Request.Path.Equals("/projects", StringComparison.OrdinalIgnoreCase) && !Context.Request.QueryString.HasValue ? "active" : "")">ALL [@Model.Projects.Count()]</a>
             @foreach (var status in Model.Statuses.OrderBy(s => s.Id))
             {
                 var projectCount = Model.Projects.Count(p => p.StatusId == status.Id);
-                <a href="?statusId=@status.Id">@status.StatusName.ToUpper() [@projectCount]</a>
+                <a href="?statusId=@status.Id" class="@((Context.Request.Path + Context.Request.QueryString).Equals($"/projects?statusId={status.Id}", StringComparison.OrdinalIgnoreCase) ? "active" : "")">@status.StatusName.ToUpper() [@projectCount]</a>
             }
         </div>
         <div class="p-page-content">
